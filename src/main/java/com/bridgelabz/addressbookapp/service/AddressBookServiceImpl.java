@@ -22,9 +22,9 @@ public class AddressBookServiceImpl implements IAddressBookService {
     @Override
     public AddressBookData getAddressbookDataById(int personId) {
         return addressbookDataList.stream()
-                .filter(addressbookData -> addressbookData.getPersonId()==personId)
+                .filter(addressbookData -> addressbookData.getPersonId() == personId)
                 .findFirst()
-                .orElseThrow(()->new AddressbookException("Person Not found"));
+                .orElseThrow(() -> new AddressbookException("Person Not found"));
     }
 
     @Override
@@ -38,8 +38,7 @@ public class AddressBookServiceImpl implements IAddressBookService {
     @Override
     public AddressBookData updateAddressbookData(int personId, AddressbookDTO addressbookDTO) {
         AddressBookData addressbookData = this.getAddressbookDataById(personId);
-        addressbookData.setName(addressbookDTO.name);
-        addressbookData.setPhNumber(addressbookDTO.phNumber);
+        addressbookData.updateAddressBookdata(addressbookDTO);
         addressbookDataList.set(personId - 1, addressbookData);
         return addressbookData;
     }
